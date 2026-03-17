@@ -244,6 +244,13 @@
     cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px;
   }
   .mark-done-btn:hover, .mark-done-btn.done { background: #38a169; color: white; }
+  .submit-btn {
+    padding: 10px 20px; border-radius: 10px; border: 2px solid #805ad5;
+    background: transparent; color: #805ad5; font-size: 0.88rem; font-weight: 600;
+    cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px;
+    font-family: inherit;
+  }
+  .submit-btn:hover { background: #805ad5; color: white; }
 
   /* Responsive */
   @media (max-width: 700px) {
@@ -1440,12 +1447,25 @@ function renderCardNav(d) {
   return `
     <div class="card-nav">
       <button class="nav-btn prev" onclick="goDay(${d.day - 1})" ${d.day === 1 ? 'disabled' : ''}>← 上一天</button>
-      <button class="mark-done-btn ${isDone ? 'done' : ''}" onclick="toggleDone(${d.day})" id="done-btn-${d.day}">
-        ${isDone ? '✓ 已完成' : '☐ 標記完成'}
-      </button>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
+        <button class="mark-done-btn ${isDone ? 'done' : ''}" onclick="toggleDone(${d.day})" id="done-btn-${d.day}">
+          ${isDone ? '✓ 已完成' : '☐ 標記完成'}
+        </button>
+        <button class="submit-btn" onclick="submitHomework(${d.day})">📝 提交今日作業</button>
+      </div>
       <button class="nav-btn next" onclick="goDay(${d.day + 1})" ${d.day === 21 ? 'disabled' : ''}>下一天 →</button>
     </div>
   `;
+}
+
+function submitHomework(day) {
+  const name = sessionStorage.getItem('trainee_name') || '';
+  const baseUrl = 'https://docs.google.com/forms/d/e/1FAIpQLScT5lSECD0i11yhZGdKvyx9ov3cZAB8LXfAQi33DrQAyw4XOQ/viewform';
+  // 預先填入姓名和天數
+  const url = baseUrl + '?usp=pp_url'
+    + '&entry.name=' + encodeURIComponent(name)
+    + '#day=' + day;
+  window.open(url, '_blank');
 }
 
 function updateProgress() {
