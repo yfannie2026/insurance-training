@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VKAM 保險銷售員 21天培訓計劃</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Noto Sans TC', sans-serif; }
+        body { background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #7dd3fc 100%); min-height: 100vh; color: #1e293b; }
+        .gradient-text { background: linear-gradient(135deg, #0284c7, #0ea5e9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .card-hover:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(2, 132, 199, 0.2); }
+        .concept-box { background: linear-gradient(145deg, #f0f9ff, #e0f2fe); border-left: 4px solid #0ea5e9; color: #1e293b; }
+        .tip-box { background: linear-gradient(145deg, #fef3c7, #fde68a); border-left: 4px solid #f59e0b; color: #92400e; }
+        .script { background: linear-gradient(145deg, #f8fafc, #e2e8f0); border: 1px solid #cbd5e0; color: #1e293b; font-family: 'Consolas', 'Courier New', monospace; }
+        .login-container { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(14, 165, 233, 0.3); }
+        .login-input { background: rgba(255, 255, 255, 0.9); border: 2px solid rgba(14, 165, 233, 0.3); color: #1e293b; }
+        .login-input:focus { border-color: #0ea5e9; box-shadow: 0 0 15px rgba(14, 165, 233, 0.3); outline: none; }
+        .login-btn { background: linear-gradient(135deg, #0ea5e9, #0284c7); color: white; font-weight: 700; }
+        .login-btn:hover { background: linear-gradient(135deg, #0284c7, #0ea5e9); }
+        .day-card { background: linear-gradient(145deg, #ffffff, #f1f5f9); border: 2px solid rgba(14, 165, 233, 0.3); cursor: pointer; transition: all 0.3s; }
+        .day-card:hover { border-color: #0ea5e9; transform: translateY(-3px); }
+        .day-card.completed { border-color: #10b981; background: linear-gradient(145deg, #ecfdf5, #d1fae5); }
+        .day-card.today { border-color: #ef4444; animation: pulse-border 2s infinite; }
+        @keyframes pulse-border { 0%, 100% { box-shadow: 0 0 10px rgba(239, 68, 68, 0.5); } 50% { box-shadow: 0 0 25px rgba(239, 68, 68, 0.8); } }
+        .progress-fill { background: linear-gradient(90deg, #0ea5e9, #0284c7); height: 100%; transition: width 0.5s; }
+        .tab-active { background: linear-gradient(135deg, #0ea5e9, #0284c7); color: white; }
+        @keyframes pulse-blue { 0%, 100% { box-shadow: 0 0 20px rgba(14, 165, 233, 0.4); } 50% { box-shadow: 0 0 40px rgba(14, 165, 233, 0.8); } }
+        .pulse-animation { animation: pulse-blue 2s ease-in-out infinite; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #0ea5e9, #0284c7); border-radius: 4px; }
+        .mobile-menu { background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px); }
+        .nav-btn:hover { transform: scale(1.05); }
+    </style>
+</head>
+<body class="text-white">
+
+    <!-- LOGIN PAGE -->
+    <div id="loginPage" class="min-h-screen flex items-center justify-center p-4">
+        <div class="login-container rounded-3xl p-8 md:p-12 max-w-md w-full shadow-2xl">
+            <div class="text-center mb-8">
+                <div class="w-20 h-20 bg-gradient-to-br from-sky-400 to-blue-600 rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-lg">
+                    <span class="text-3xl font-black text-white">VKAM</span>
+                </div>
+                <p class="text-blue-500 text-sm font-bold tracking-widest mb-1">保險銷售員培訓</p>
+                <h1 class="text-3xl font-bold gradient-text mb-2">21天培訓計劃</h1>
+                <p class="text-slate-500">混合班適用 · 循序漸進</p>
+            </div>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm text-slate-600 mb-2">你的姓名</label>
+                    <input type="text" id="loginName" class="login-input w-full px-4 py-3 rounded-xl" placeholder="請輸入姓名">
+                </div>
+                <div>
+                    <label class="block text-sm text-slate-600 mb-2">培訓密碼</label>
+                    <input type="password" id="loginPassword" class="login-input w-full px-4 py-3 rounded-xl" placeholder="請輸入密碼">
+                </div>
+                <button onclick="handleLogin()" class="login-btn w-full py-4 rounded-xl text-lg mt-6 shadow-lg">進入培訓 🚀</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN PAGE -->
+    <div id="mainPage" class="hidden">
+
+        <!-- Navigation -->
+        <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-sky-500/30 shadow-lg">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gradient-to-br from-sky-400 to-blue-600 rounded-lg flex items-center justify-center font-bold text-white shadow-md">VKAM</div>
+                        <div>
+                            <span class="font-bold text-slate-700">21天培訓</span>
+                            <span id="userNameDisplay" class="ml-2 text-sm text-sky-600 font-medium"></span>
+                        </div>
+                    </div>
+                    <div class="hidden md:flex items-center gap-2">
+                        <button onclick="showWeek(1)" class="nav-btn px-4 py-2 rounded-lg hover:bg-sky-500/20 transition-all text-slate-700" data-week="1">📗 第一週</button>
+                        <button onclick="showWeek(2)" class="nav-btn px-4 py-2 rounded-lg hover:bg-sky-500/20 transition-all text-slate-700" data-week="2">📕 第二週</button>
+                        <button onclick="showWeek(3)" class="nav-btn px-4 py-2 rounded-lg hover:bg-sky-500/20 transition-all text-slate-700" data-week="3">📘 第三週</button>
+                        <button onclick="logout()" class="px-4 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white font-medium transition-all">🚪 登出</button>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="logout()" class="hidden md:block px-3 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white text-sm font-medium transition-all">🚪</button>
+                        <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-slate-700">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 pb-3">
+                    <div class="flex-1 h-2 bg-slate-200 rounded-full overflow-hidden">
+                        <div id="progressFill" class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <span id="progressText" class="text-sm text-slate-500">0 / 21 天</span>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="mobile-menu hidden md:hidden absolute top-16 left-0 right-0 p-4 border-t border-sky-500/30">
+                <div class="flex flex-col gap-2">
+                    <button onclick="showWeek(1); toggleMobileMenu();" class="px-4 py-3 rounded-lg hover:bg-sky-500/20 text-left text-slate-700">📗 第一週：心態 · 認識保險</button>
+                    <button onclick="showWeek(2); toggleMobileMenu();" class="px-4 py-3 rounded-lg hover:bg-sky-500/20 text-left text-slate-700">📕 第二週：產品知識 · 話術</button>
+                    <button onclick="showWeek(3); toggleMobileMenu();" class="px-4 py-3 rounded-lg hover:bg-sky-500/20 text-left text-slate-700">📘 第三週：開發客戶 · 實戰</button>
+                    <button onclick="logout(); toggleMobileMenu();" class="px-4 py-3 rounded-lg bg-red-500 hover:bg-red-600 text-left text-white font-medium">🚪 登出</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Day Content -->
+        <div id="dayContent" class="hidden pt-28 pb-24 px-4 max-w-6xl mx-auto"></div>
+
+        <!-- Week Overview -->
+        <div id="weekOverview" class="pt-28 pb-20 px-4 max-w-6xl mx-auto">
+            <!-- Week 1 -->
+            <div id="week1Content">
+                <h2 class="text-2xl font-bold gradient-text mb-6 text-slate-800">📗 第一週：心態 · 認識保險（Day 1-7）</h2>
+                <div id="week1Days" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8"></div>
+            </div>
+            <div id="week2Content" class="hidden">
+                <h2 class="text-2xl font-bold gradient-text mb-6 text-slate-800">📕 第二週：產品知識 · 話術（Day 8-14）</h2>
+                <div id="week2Days" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8"></div>
+            </div>
+            <div id="week3Content" class="hidden">
+                <h2 class="text-2xl font-bold gradient-text mb-6 text-slate-800">📘 第三週：開發客戶 · 實戰（Day 15-21）</h2>
+                <div id="week3Days" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8"></div>
+            </div>
+
+            <!-- Course Info -->
+            <div class="bg-white/70 rounded-2xl p-8 border border-sky-500/30 mt-8 shadow-lg backdrop-blur-sm">
+                <h3 class="text-xl font-bold text-sky-600 mb-4">📚 課程地圖</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-white/60 rounded-xl p-4 border border-sky-300/30">
+                        <h4 class="font-bold text-sky-600 mb-3">📗 第一週重點</h4>
+                        <ul class="text-slate-600 space-y-1 text-sm">
+                            <li>• Day 1：為什麼要做保險？</li>
+                            <li>• Day 2：了解你的客戶群</li>
+                            <li>• Day 3：如何約到第一次見面</li>
+                            <li>• Day 4：第一次見面怎樣談？</li>
+                            <li>• Day 5：拒絕處理入門</li>
+                            <li>• Day 6：專業形象與信任建立</li>
+                            <li>• Day 7：第一週總結與回顧</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white/60 rounded-xl p-4 border border-sky-300/30">
+                        <h4 class="font-bold text-sky-600 mb-3">📕 第二週重點</h4>
+                        <ul class="text-slate-600 space-y-1 text-sm">
+                            <li>• Day 8：保險產品大分類</li>
+                            <li>• Day 9：深入了解主力產品</li>
+                            <li>• Day 10：需求分析與方案建議</li>
+                            <li>• Day 11：建議書呈現技巧</li>
+                            <li>• Day 12：促成技巧</li>
+                            <li>• Day 13：進階拒絕處理</li>
+                            <li>• Day 14：第二週總結與實戰演練</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white/60 rounded-xl p-4 border border-sky-300/30">
+                        <h4 class="font-bold text-sky-600 mb-3">📘 第三週重點</h4>
+                        <ul class="text-slate-600 space-y-1 text-sm">
+                            <li>• Day 15：主動開發客戶策略</li>
+                            <li>• Day 16：轉介紹的藝術</li>
+                            <li>• Day 17：售後服務與客戶維護</li>
+                            <li>• Day 18：數字管理與目標設定</li>
+                            <li>• Day 19：數字化與社交媒體</li>
+                            <li>• Day 20：持續學習與自我提升</li>
+                            <li>• Day 21：21天總結</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Nav -->
+        <div id="navButtons" class="fixed bottom-0 left-0 right-0 bg-white/95 p-4 hidden shadow-[0_-10px_30px_rgba(0,0,0,0.1)]">
+            <div class="max-w-6xl mx-auto flex gap-4">
+                <button onclick="prevDay()" class="flex-1 py-3 rounded-xl bg-slate-200 hover:bg-slate-300 transition-all text-slate-700 font-medium">← 上一天</button>
+                <button onclick="backToOverview()" class="flex-1 py-3 rounded-xl bg-slate-200 hover:bg-slate-300 transition-all text-slate-700 font-medium">📋 總覽</button>
+                <button onclick="nextDay()" class="flex-1 py-3 rounded-xl login-btn shadow-lg">下一天 →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CELEBRATION OVERLAY -->
+    <div id="celebrationOverlay" class="fixed inset-0 bg-white/90 backdrop-blur-sm z-50 hidden items-center justify-center">
+        <div class="text-center">
+            <div class="mb-8">
+                <div class="text-9xl mb-4 animate-bounce">🏆</div>
+                <div class="text-6xl mb-2 animate-pulse">🎉</div>
+                <div class="text-6xl mb-2 animate-pulse" style="animation-delay: 0.5s;">🎊</div>
+                <div class="text-6xl animate-pulse" style="animation-delay: 1s;">🎆</div>
+            </div>
+            <h2 class="text-4xl md:text-6xl font-bold gradient-text mb-4 text-slate-800">恭喜你完成21天課程！</h2>
+            <p class="text-xl text-slate-600 mb-8">你已經具備專業保險銷售的所有知識</p>
+            <div class="flex justify-center gap-4">
+                <button onclick="closeCelebration()" class="px-8 py-4 rounded-xl text-lg font-bold bg-gradient-to-r from-sky-500 to-blue-600 text-white hover:from-blue-600 hover:to-sky-600 transition-all transform hover:scale-105 shadow-lg">
+                    返回總覽 📋
+                </button>
+                <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSenJ_3A-h6Njc2yUKeAw-QWGArOakwd5QxUOoM8tRPKYTVRvQ/viewform', '_blank')" class="px-8 py-4 rounded-xl text-lg font-bold bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 transition-all transform hover:scale-105 text-white shadow-lg">
+                    提交最終作業 📤
+                </button>
+            </div>
+        </div>
+    </div>
+
+<script>
+// ============ CONFIG ============
+const TRAINING_PASSWORD = 'insurance2026';
+const TEAM_NAME = 'VKAM';
+const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSenJ_3A-h6Njc2yUKeAw-QWGArOakwd5QxUOoM8tRPKYTVRvQ/viewform';
+
+// ============ 21天課程數據 ============
+const curriculum = [
+    // ===== WEEK 1 =====
+    {
+        day: 1, week: 1,
+        title: '為什麼要做保險？',
+        subtitle: '建立正確的銷售心態，從這裡開始',
+        emoji: '🎯',
+        intro: '建立正確的銷售心態，從這裡開始',
+        mustKnow: [
+            { term: '保險銷售心態', meaning: '保險不是「賣」出去的，而是「幫」客戶的。你是在幫人做財務保障，而不是推銷' },
+            { term: '使命感', meaning: '當客戶真的出意外，你的保單是保護他家人的最後一道防線' },
+            { term: '新人失敗主因', meaning: '不是客戶拒絕太多，而是自己先放棄' }
+        ],
+        concept: '保險不是「賣」出去的，而是「幫」客戶的。很多新人覺得做保險是推銷，所以心裡不舒服。但換個角度想：如果客戶真的出了意外，你的保單是保護他家人的最後一道防線。記住這句話：「我不是在賣保險，我是在幫人做財務保障。」',
+        steps: [
+            '寫下你做保險的「3個原因」——為自己、為家人、為客戶各一個',
+            '閱讀1個真實理賠故事（可向上司索取），感受保險的真實價值',
+            '對著鏡子說：「我是保險顧問，我幫人規劃財務保障」，說10次',
+            '與資深同事交流：他們為何堅持做保險？記錄下來'
+        ],
+        tip: '心態比技巧更重要！新人最常見的失敗原因是「自己先放棄」，而不是「客戶拒絕太多」。每天回顧你做保險的原因，能幫你撐過困難時期。',
+        homework: [
+            '寫下你的「保險使命宣言」（1-2句話）',
+            '找到1個令你感動的理賠案例',
+            '明天帶來與全班分享'
+        ]
+    },
+    {
+        day: 2, week: 1,
+        title: '了解你的客戶群',
+        subtitle: '誰最需要保險？怎樣找到他們？',
+        emoji: '👥',
+        intro: '誰最需要保險？怎樣找到他們？',
+        mustKnow: [
+            { term: 'A類客戶', meaning: '親友、同學、同事——信任度最高，適合新人起步' },
+            { term: 'B類客戶', meaning: '客戶的親友介紹——信任度中等，成功率高' },
+            { term: 'C類客戶', meaning: '陌生開發（Cold Call）——需要技巧，進階再學' }
+        ],
+        concept: '不是所有人都是你的客戶，但幾乎每個人都需要保險。關鍵是找出「最有需要、最有能力、最願意聽」的人。初學者建議先從「熟悉的人」開始，因為信任已經建立了一半。',
+        steps: [
+            'A類客戶：親友、同學、同事——信任度最高，適合新人起步',
+            'B類客戶：客戶的親友介紹——信任度中等，成功率高',
+            'C類客戶：陌生開發（Cold Call）——需要技巧，進階再學',
+            '列出你的A類名單：寫下20個潛在聯絡人的名字'
+        ],
+        tip: '很多新人怕「影響友情」所以不找熟人。其實，你提供的是真正有價值的服務——如果連朋友都不信任你，陌生人更不會。從熟人開始，建立信心，再擴展。',
+        homework: [
+            '完成客戶名單（最少20人）',
+            '選出最想先聯絡的3人',
+            '準備明天學習如何約見面'
+        ]
+    },
+    {
+        day: 3, week: 1,
+        title: '如何約到第一次見面',
+        subtitle: '打電話不可怕，有方法就不怕被拒絕',
+        emoji: '📞',
+        intro: '打電話不可怕，有方法就不怕被拒絕',
+        mustKnow: [
+            { term: '約見目的', meaning: '爭取一次面對面談話的機會，不要在電話裡講產品' },
+            { term: '二選一法', meaning: '不問「有無空」，而是問「周二還是周三？」' }
+        ],
+        concept: '約見面的目的只有一個：爭取一次面對面談話的機會。不要在電話裡講產品，不要解釋太多。越簡單越好，讓對方說「好，見面聊聊」就成功了。',
+        script: `約見話術範例（熟人版）：
+喂，阿明！好耐無見，最近點呀？ → 還好，你呢？ → 都OK，最近轉咗做財務規劃顧問。想趁機同你敘下舊，順便聽下你對財務方面有咩想法，你下週有冇空飲下茶？ → 飲茶？係關保險咩？ → 都有啦，但主要係想同你了解下你現時嘅財務狀況，睇下有咩地方我可以幫到你。見面傾好過電話講，你下週二定三好？`,
+        steps: [
+            '問候：用對方熟悉的方式打招呼，拉近距離',
+            '原因：說一個簡單理由（想了解你的想法 / 敘舊）',
+            '二選一：不問「有無空」，而是問「周二還是周三？」'
+        ],
+        tip: '被拒絕是正常的！平均打10個電話，有3-4個願意見面就很好了。每次拒絕都是練習，不是失敗。',
+        homework: [
+            '對著錄音練習話術3次',
+            '今天聯絡名單上的2個人',
+            '記錄結果（願意見/需要再跟進/拒絕）'
+        ]
+    },
+    {
+        day: 4, week: 1,
+        title: '第一次見面怎樣談？',
+        subtitle: '讓客戶說話，你來聆聽',
+        emoji: '💬',
+        intro: '讓客戶說話，你來聆聽',
+        mustKnow: [
+            { term: '首次面談目的', meaning: '不是來賣保險，是來了解客戶的' },
+            { term: '需求挖掘', meaning: '問問題 → 聆聽 → 找出需求' }
+        ],
+        concept: '第一次見面不是來賣保險的，是來了解客戶的。很多新人急著介紹產品，結果客戶覺得被推銷，馬上設防。正確做法是：問問題 → 聆聽 → 找出需求，讓客戶自己說出他們的憂慮。',
+        script: `需求分析開場白：
+「我今天帶來了一些問題想請教你，幫我更了解你的情況，這樣我才能給你最合適的建議，而不是亂推一個方案給你。」
+
+「先問一下，你現在自己有沒有額外買保險？」
+
+注意：記得帶紙筆記錄客戶答案，讓他們看到你在認真對待他們的情況。`,
+        steps: [
+            '暖身（5分鐘）：聊天氣、近況、不涉及保險',
+            '了解家庭（10分鐘）：有無伴侶？小孩幾歲？父母健康？',
+            '了解財務（10分鐘）：現有保障？有無投資？退休計劃？',
+            '找出憂慮（5分鐘）：最擔心什麼？希望保護誰？'
+        ],
+        tip: '黃金法則：永遠不要跟客戶爭辯。接受他的感受 → 提問了解背後原因 → 針對性回應。拒絕是對話的開始，不是結束。',
+        homework: [
+            '背熟「首次面談四步曲」',
+            '與同事角色扮演練習一次',
+            '如已約好客戶，嘗試使用今天所學'
+        ]
+    },
+    {
+        day: 5, week: 1,
+        title: '拒絕處理入門',
+        subtitle: '客戶說「不」，不代表結束',
+        emoji: '🛡️',
+        intro: '客戶說「不」，不代表結束',
+        mustKnow: [
+            { term: '真拒絕 vs 假拒絕', meaning: '假拒絕是「我還沒準備好」或「我還有疑慮」，不是永遠拒絕' },
+            { term: '拒絕處理黃金法則', meaning: '接受感受 → 提問了解原因 → 針對性回應' }
+        ],
+        concept: '客戶說「不」，大多數時候是說：「我還沒準備好」或「我還有疑慮」，而不是永遠拒絕你這個人。學會分辨「真拒絕」和「假拒絕」，能幫你找到繼續談下去的突破口。',
+        steps: [
+            '「我沒錢」 → 回應：「完全明白！所以我才想幫你找一個最適合你預算的方案，你一個月大概可以拿出多少做保障？」',
+            '「我不需要」 → 回應：「如果有一天真的需要，再買可能已經太遲了。你最擔心的是什麼情況發生？」',
+            '「讓我考慮一下」 → 回應：「當然！你主要考慮哪方面？讓我看看有沒有什麼資料可以幫你釐清。」'
+        ],
+        tip: '黃金法則：永遠不要跟客戶爭辯。接受他的感受 → 提問了解背後原因 → 針對性回應。拒絕是對話的開始，不是結束。',
+        homework: [
+            '列出你曾遇過或最怕的5種拒絕',
+            '為每種拒絕寫出應對話術',
+            '與同事練習拒絕處理角色扮演'
+        ]
+    },
+    {
+        day: 6, week: 1,
+        title: '專業形象與信任建立',
+        subtitle: '客戶買的是你這個人，不只是保單',
+        emoji: '💼',
+        intro: '客戶買的是你這個人，不只是保單',
+        mustKnow: [
+            { term: '專業形象', meaning: '你的形象就是你的品牌，客戶把家人的保障交到你手上' },
+            { term: '信任建立工具', meaning: '說到做到，每次都準時，每次都跟進——時間長了，客戶自然信任你' }
+        ],
+        concept: '在保險行業，你的形象就是你的品牌。客戶不只是買一份保單，他們是把家人的保障交到你手上。穿著、說話方式、守時、跟進速度，每一個細節都在建立或破壞信任。',
+        checklist: [
+            '穿著整齊、得體（深色或淡色正裝為宜）',
+            '名片已準備好，整潔無折痕',
+            '約定時間提前5分鐘到達',
+            '見面時手機靜音，全神貫注',
+            '客戶說話時認真聆聽，適時點頭',
+            '談話後24小時內跟進（WhatsApp或電話）',
+            '每次承諾的事一定做到'
+        ],
+        tip: '「一致性」是最強的信任建立工具。說到做到，每次都準時，每次都跟進——時間長了，客戶自然信任你，也會主動介紹朋友給你。',
+        homework: [
+            '對照清單，找出自己需要改善的地方',
+            '整理你的名片/聯絡資料是否完整',
+            '回想上週有哪些承諾還沒跟進？今天完成'
+        ]
+    },
+    {
+        day: 7, week: 1,
+        title: '第一週總結與回顧',
+        subtitle: '鞏固基礎，為第二週做好準備',
+        emoji: '📊',
+        intro: '鞏固基礎，為第二週做好準備',
+        summary: [
+            '✅ 正確的銷售心態（幫人，不是推銷）',
+            '✅ 找到你的目標客戶群',
+            '✅ 約見客戶的話術',
+            '✅ 首次面談技巧',
+            '✅ 拒絕處理基礎',
+            '✅ 專業形象與信任建立'
+        ],
+        tip: '給自己的話：第一週是最難的，因為一切都是新的。但你已經走了最重要的一步。下週我們進入產品知識——了解你賣的東西，讓你更有信心面對客戶。',
+        homework: [
+            '完成自我評估清單，未完成的補做',
+            '與導師/上司分享本週心得',
+            '預習下週主題：保險產品種類',
+            '好好休息！準備迎接第二週 💪'
+        ]
+    },
+
+    // ===== WEEK 2 =====
+    {
+        day: 8, week: 2,
+        title: '保險產品大分類',
+        subtitle: '搞清楚你賣什麼，才能幫到客戶',
+        emoji: '📚',
+        intro: '搞清楚你賣什麼，才能幫到客戶',
+        mustKnow: [
+            { term: '人壽保險', meaning: '人走了，賠錢給家人' },
+            { term: '醫療保險', meaning: '看病住院，保費幫你付' },
+            { term: '危疾保險', meaning: '患大病（如癌症），一筆過賠' },
+            { term: '儲蓄/投資保險', meaning: '兼顧保障+儲錢/增值' }
+        ],
+        concept: '保險產品看起來複雜，其實可以分四大類：\n\n🔵 人壽保險：人走了，賠錢給家人\n🟢 醫療保險：看病住院，保費幫你付\n🟡 危疾保險：患大病（如癌症），一筆過賠\n🔴 儲蓄/投資保險：兼顧保障+儲錢/增值',
+        steps: [
+            '人壽保險：「萬一你不在，家人的生活費從哪裡來？」',
+            '醫療保險：「公立醫院輪候時間長，私家醫院費用高，醫療保險讓你有選擇。」',
+            '危疾保險：「患癌後，治療費可能超過100萬，危疾賠款讓你專心康復。」',
+            '儲蓄保險：「既有保障，又能強迫儲蓄，比單純放銀行更有紀律。」'
+        ],
+        homework: [
+            '向上司索取公司主力產品的簡介',
+            '為每類保險各寫出一句客戶聽得懂的解釋',
+            '找出你公司最暢銷的3款產品'
+        ]
+    },
+    {
+        day: 9, week: 2,
+        title: '深入了解主力產品',
+        subtitle: '熟悉自己的武器，才能精準出擊',
+        emoji: '📋',
+        intro: '熟悉自己的武器，才能精準出擊',
+        mustKnow: [
+            { term: '保障範圍', meaning: '保什麼事情' },
+            { term: '除外責任', meaning: '不保什麼' },
+            { term: '保費範圍', meaning: '月付大概多少' },
+            { term: '投保年齡限制', meaning: '幾多到幾多歲可以買' },
+            { term: '等候期', meaning: '何時才開始生效' },
+            { term: '最適合客戶類型', meaning: '新婚、有小孩、中年人等' }
+        ],
+        concept: '你不需要背下所有產品的所有細節，但你必須對公司3-5款主力產品非常熟悉。重點掌握：保什麼、不保什麼、保費大概多少、最適合哪種客戶。',
+        checklist: [
+            '保障範圍（保什麼事情）',
+            '除外責任（不保什麼）',
+            '保費範圍（月付大概多少）',
+            '投保年齡限制',
+            '等候期（何時才開始生效）',
+            '最適合的客戶類型（新婚、有小孩、中年人等）',
+            '與競爭對手最大的分別'
+        ],
+        tip: '不懂的問題，不要在客戶面前亂答。可以說：「這個問題很好，讓我確認清楚後再回覆你。」然後真的去查清楚。誠實比假裝知道更專業。',
+        homework: [
+            '完成主力產品的功課表（用自己的話寫）',
+            '向資深同事查問你不清楚的地方',
+            '嘗試向家人解釋一款產品，看他們是否聽得懂'
+        ]
+    },
+    {
+        day: 10, week: 2,
+        title: '需求分析與方案建議',
+        subtitle: '不是賣最貴的，是賣最合適的',
+        emoji: '📊',
+        intro: '不是賣最貴的，是賣最合適的',
+        mustKnow: [
+            { term: '需求分析', meaning: '了解客戶家庭、財務、憂慮、優先次序' },
+            { term: '財務醫生', meaning: '優秀的保險顧問不是推銷員，而是財務醫生' }
+        ],
+        concept: '優秀的保險顧問不是推銷員，而是「財務醫生」。醫生不會未檢查就開藥，同樣，你要先了解客戶的需求，再提出合適的方案。「最適合」比「最貴」更重要。',
+        script: `需求分析開場白：
+「我今天帶來了一些問題想請教你，幫我更了解你的情況，這樣我才能給你最合適的建議，而不是亂推一個方案給你。」
+
+「先問一下，你現在自己有沒有額外買保險？」
+
+注意：記得帶紙筆記錄客戶答案，讓他們看到你在認真對待他們的情況。`,
+        steps: [
+            '家庭狀況：幾多人需要你養？有無負債（按揭）？',
+            '現有保障：已有什麼保險？有什麼缺口？',
+            '財務能力：每月可以拿出多少做保障費用？',
+            '主要憂慮：最怕什麼發生？（生病？早走？退休無錢？）',
+            '優先次序：如果只能做一樣，先做哪樣？'
+        ],
+        tip: '報價小技巧：說保費時，用「每天不到X元」比「每月X百元」更容易接受。例如：「每天大約$10，就有$100萬的保障」，聽起來會更合理。',
+        homework: [
+            '製作一份簡單的「需求分析問卷」（5-8題）',
+            '與同事練習需求分析面談',
+            '根據一個假設客戶情況，設計一個方案'
+        ]
+    },
+    {
+        day: 11, week: 2,
+        title: '建議書呈現技巧',
+        subtitle: '讓客戶看懂你的方案，並且想要買',
+        emoji: '📄',
+        intro: '讓客戶看懂你的方案，並且想要買',
+        mustKnow: [
+            { term: '建議書目的', meaning: '不是數字堆砌，而是「說故事」' },
+            { term: '呈現技巧', meaning: '先講保障內容，後講費用（不要一開始就報價）' }
+        ],
+        concept: '一份好的建議書不是數字堆砌，而是「說故事」。讓客戶看到：「如果沒有這個保障，會發生什麼？有了它，情況會有多不同？」',
+        steps: [
+            '回顧需求：「上次你說最擔心的是……」（讓他知道你記得）',
+            '呈現方案：先講保障內容，後講費用（不要一開始就報價）',
+            '確認感受：「這個方案是否符合你的需求？有什麼地方想調整？」'
+        ],
+        tip: '報價小技巧：說保費時，用「每天不到X元」比「每月X百元」更容易接受。例如：「每天大約$10，就有$100萬的保障」，聽起來會更合理。',
+        homework: [
+            '準備一份真實（或模擬）客戶的建議書',
+            '練習在15分鐘內清晰呈現方案',
+            '請同事或上司給你反饋'
+        ]
+    },
+    {
+        day: 12, week: 2,
+        title: '促成技巧',
+        subtitle: '幫客戶做決定，而不是替他們思考',
+        emoji: '🤝',
+        intro: '幫客戶做決定，而不是替他們思考',
+        mustKnow: [
+            { term: '假設成交', meaning: '「你的受益人想寫太太還是父母？」（假設他已決定）' },
+            { term: '二選一', meaning: '「你想先做醫療保障還是危疾？」（兩個都是成交）' },
+            { term: '緊迫感', meaning: '「這個保費是按年齡計算的，越早買越便宜」' }
+        ],
+        concept: '很多保險顧問在最後關頭猶豫，怕被拒絕，所以不敢開口。但其實，客戶有時候只需要你輕輕推一把。促成不是強迫，是幫助猶豫中的客戶做出對他有好處的決定。',
+        steps: [
+            '假設成交：「你的受益人想寫太太還是父母？」（假設他已決定）',
+            '二選一：「你想先做醫療保障還是危疾？」（兩個都是成交）',
+            '緊迫感：「這個保費是按年齡計算的，越早買越便宜，你今年X歲，明年就會貴一些」',
+            '總結確認：「你說你最想保障家人，這個方案正好幫你做到，我們今天可以先填申請表嗎？」'
+        ],
+        tip: '重要提醒：不要用恐嚇手段迫客戶！「你不買將來後悔」這種說法會讓客戶反感。促成是引導，不是威脅。建立長期信任比一次成交更重要。',
+        homework: [
+            '把4種促成技巧各自練習說一遍',
+            '角色扮演：從需求分析到促成的完整流程',
+            '記錄哪種技巧對你最自然，最常用'
+        ]
+    },
+    {
+        day: 13, week: 2,
+        title: '進階拒絕處理',
+        subtitle: '應對更複雜的客戶疑慮',
+        emoji: '🎓',
+        intro: '應對更複雜的客戶疑慮',
+        mustKnow: [
+            { term: '深層疑慮', meaning: '客戶拒絕背後有更深原因：不信任保險公司、曾有不好經歷等' }
+        ],
+        concept: 'Day 5 學了基礎拒絕處理，今天進一步——很多時候，客戶的拒絕背後有更深的原因，例如不信任保險公司、曾有不好的經歷、或者根本沒有意識到自己需要保障。',
+        steps: [
+            '「保險公司不可信」 → 分享公司歷史、監管機構資訊、真實理賠案例，用事實說話',
+            '「朋友買過虧了」 → 先認同感受，再分析原因（可能是產品不匹配），說明你的做法不同',
+            '「我還年輕，不需要」 → 「正因為年輕，保費最便宜，而且越早買保障期越長」',
+            '「家人反對」 → 建議邀請家人一起來了解，讓你有機會直接解答疑慮'
+        ],
+        homework: [
+            '收集同事曾遇過的最難應對拒絕',
+            '全組討論並整理應對方法',
+            '製作你個人的「拒絕應對手冊」'
+        ]
+    },
+    {
+        day: 14, week: 2,
+        title: '第二週總結與實戰演練',
+        subtitle: '把產品知識轉化為銷售能力',
+        emoji: '🎯',
+        intro: '把產品知識轉化為銷售能力',
+        summary: [
+            '✅ 保險四大類別及核心賣點',
+            '✅ 深入了解主力產品',
+            '✅ 需求分析技巧',
+            '✅ 建議書呈現技巧',
+            '✅ 促成成交方法',
+            '✅ 進階拒絕處理'
+        ],
+        tip: '給你的話：這週你打好了產品和話術的基礎。下週我們進入客戶開發與轉介紹——真正的實戰來了！',
+        homework: [
+            '整理你的產品知識筆記',
+            '更新客戶名單，標記跟進進度',
+            '預習第三週：客戶開發與轉介紹',
+            '目標：下週爭取至少約到2個新客戶'
+        ]
+    },
+
+    // ===== WEEK 3 =====
+    {
+        day: 15, week: 3,
+        title: '主動開發客戶策略',
+        subtitle: '突破熟人圈，開拓新客源',
+        emoji: '🚀',
+        intro: '突破熟人圈，開拓新客源',
+        mustKnow: [
+            { term: 'Cold Call', meaning: '電話陌生開發，需要名單和話術' },
+            { term: '轉介紹', meaning: '最高效的客戶開發方式' }
+        ],
+        concept: '熟人名單有限，真正要做大就要學會主動開發陌生客戶。Cold Call 不是騷擾，是以專業態度向對方介紹一個可能改變他們生活的機會。關鍵在於：快速建立信任 + 篩選有意向的人。',
+        script: `Cold Call 開場話術：
+「你好，我係XX保險公司的XXX，唔好意思打擾你，我想請問你有冇興趣了解一下財務保障方面的資訊？」
+
+如果對方問「點解打俾我」：
+「我哋定期會聯絡區內的居民/專業人士，提供免費的財務保障評估，唔需要買任何野，只係了解下你現時嘅情況。」
+
+目標：不是成交，只是約到一次面談機會`,
+        steps: [
+            '轉介紹：最高效！請現有客戶介紹朋友（下一天詳細講）',
+            '社交媒體：LinkedIn / Facebook 分享有價值的內容，吸引潛在客戶主動聯絡',
+            '社區活動：參加同鄉會、行業協會、義工活動，自然拓展人脈',
+            'Cold Call：電話陌生開發，需要名單和話術（下午詳練）',
+            '展覽/擺攤：在公司許可下，在人流地方設置諮詢攤位'
+        ],
+        tip: 'Cold Call的心態：不是騷擾，是以專業態度向對方介紹一個可能改變他們生活的機會。關鍵在於：快速建立信任 + 篩選有意向的人。',
+        homework: [
+            '列出你打算用哪3個渠道開發客戶',
+            '練習Cold Call話術20次',
+            '今天打10個Cold Call電話（記錄結果）'
+        ]
+    },
+    {
+        day: 16, week: 3,
+        title: '轉介紹的藝術',
+        subtitle: '一個客戶，帶來一群客戶',
+        emoji: '🤝',
+        intro: '一個客戶，帶來一群客戶',
+        mustKnow: [
+            { term: '轉介紹威力', meaning: '一個滿意的客戶，可以帶來3-5個新客戶' },
+            { term: '轉介紹成功率', meaning: '比陌生開發高出幾倍，信任度更高' }
+        ],
+        concept: '轉介紹是保險銷售最強大的武器。一個滿意的客戶，可以帶來3-5個新客戶。而且轉介紹來的客戶，信任度比陌生開發高出幾倍，成功率也更高。',
+        steps: [
+            '時機：在客戶成交後、或服務滿意後開口，效果最好',
+            '方式：「非常感謝你信任我，我想問你，你身邊有沒有朋友也可能需要做財務規劃的？我不會強迫他們，只是想了解一下他們的情況。」',
+            '跟進：拿到名字後，問：「方不方便告訴我他/她的聯絡方式？」，或請客戶先打聲招呼',
+            '回報：成功後一定要感謝介紹人，讓他們知道你有用心服務'
+        ],
+        tip: '轉介紹的心態：不要覺得「要人介紹朋友」是麻煩對方。你是在提供一個機會讓他們的朋友得到好的財務保障。如果你的服務是真心好的，客戶其實很樂意介紹的。',
+        homework: [
+            '聯絡已成交的客戶，誠心感謝並嘗試要求轉介紹',
+            '製作一套屬於你的轉介紹話術',
+            '目標：本週拿到最少3個轉介紹名字'
+        ]
+    },
+    {
+        day: 17, week: 3,
+        title: '售後服務與客戶維護',
+        subtitle: '成交是開始，不是結束',
+        emoji: '💝',
+        intro: '成交是開始，不是結束',
+        mustKnow: [
+            { term: '客戶維護重要性', meaning: '一個長期維護的客戶，十年內可能買5-6份保單，也可以介紹更多人給你' }
+        ],
+        concept: '很多顧問在成交後就消失了，等到客戶想轉換顧問才後悔。最好的客戶開發，是把現有客戶服務好。一個長期維護的客戶，十年內可能買5-6份保單，也可以介紹更多人給你。',
+        checklist: [
+            '成交後1週：確認保單已收到，解釋保單內容',
+            '成交後1個月：跟進是否有任何問題',
+            '每半年：主動聯絡，問候近況，了解保障是否仍合適',
+            '客戶生日：發送祝福（小小心意，大大效果）',
+            '每年：做年度保障檢視，看是否需要更新方案',
+            '重大人生變化（結婚/生小孩/升職）：主動聯絡，建議更新保障'
+        ],
+        tip: '用科技幫你記住客戶：用手機日曆或CRM工具記錄客戶生日、保單到期日、重要跟進日期。設定提醒，讓你永遠不會忘記。你的記性好不好不重要，系統好不好才重要。',
+        homework: [
+            '為現有/潛在客戶建立一份跟進紀錄',
+            '設定未來30天的客戶跟進提醒',
+            '聯絡一位「好耐無聯絡」的客戶，問候一下'
+        ]
+    },
+    {
+        day: 18, week: 3,
+        title: '數字管理與目標設定',
+        subtitle: '用數字說話，讓成功可以預測',
+        emoji: '📈',
+        intro: '用數字說話，讓成功可以預測',
+        mustKnow: [
+            { term: '數字遊戲', meaning: '你不能控制客戶是否成交，但你可以控制你的活動量' },
+            { term: '成交漏斗', meaning: '聯絡20人 → 約10個見面 → 5個有意向 → 2個成交' }
+        ],
+        concept: '保險銷售是一個「數字遊戲」。你不能控制客戶是否成交，但你可以控制你的活動量。只要活動量夠大，成交是必然的結果。管理好你的數字，成功就可以被計算和預測。',
+        steps: [
+            '聯絡20人 → 約到10個見面機會（50%約見率）',
+            '10次面談 → 5個客戶有興趣（50%意向率）',
+            '5個有意向 → 2個成交（40%成交率）',
+            '結論：每20個聯絡，約有2個成交。要做10單，就要聯絡100人！'
+        ],
+        tip: '每週活動量目標（建議）：新人建議：每週聯絡15個潛在客戶 → 約5次面談 → 提交2份建議書 → 爭取1個成交。達到這個活動量，一個月約4單，是健康的起步水平。',
+        homework: [
+            '計算你過去兩週的活動量（聯絡/見面/成交比例）',
+            '找出你的漏斗哪個環節最弱？',
+            '設定下個月的活動量目標',
+            '製作簡單的每週追蹤表'
+        ]
+    },
+    {
+        day: 19, week: 3,
+        title: '數字化與社交媒體',
+        subtitle: '讓網絡幫你開發客戶',
+        emoji: '🌐',
+        intro: '讓網絡幫你開發客戶',
+        mustKnow: [
+            { term: '社交媒體行銷', meaning: '定期分享有價值的財務資訊，潛在客戶會記住你，甚至主動聯絡你' }
+        ],
+        concept: '現代保險顧問除了線下拓展，還要善用社交媒體建立個人品牌。當你定期分享有價值的財務資訊，潛在客戶會記住你，甚至主動聯絡你——這比Cold Call容易得多。',
+        steps: [
+            '每週2-3篇：分享保險/財務知識（用日常語言，不要太專業）',
+            '真實故事：分享（匿名）客戶案例，讓人感受到保險的真實價值',
+            '個人生活：偶爾分享工作日常，讓關注者認識真實的你',
+            '互動：回覆每一個評論和私訊，建立關係'
+        ],
+        tip: '注意事項：發佈前必須確認符合公司的社交媒體政策！有些公司對分享產品資訊有規定。不確定的話，先問上司，避免違規。',
+        homework: [
+            '整理你的社交媒體（確保形象專業）',
+            '起草3篇下週可以發佈的內容帖子',
+            '了解公司的社交媒體使用規定'
+        ]
+    },
+    {
+        day: 20, week: 3,
+        title: '持續學習與自我提升',
+        subtitle: '最好的顧問，永遠都在學習',
+        emoji: '📚',
+        intro: '最好的顧問，永遠都在學習',
+        mustKnow: [
+            { term: '持續學習', meaning: '保險行業不斷在變化——產品更新、法規調整、客戶需求也在變' },
+            { term: '職業發展', meaning: '停止學習的那一天，就是被超越的開始' }
+        ],
+        concept: '保險行業不斷在變化——產品更新、法規調整、客戶需求也在變。停止學習的那一天，就是被超越的開始。最頂尖的保險顧問，往往也是最勤於進修的那一批。',
+        checklist: [
+            '每月最少閱讀1本財務/銷售相關書籍',
+            '定期參加公司培訓和業界研討會',
+            '考取相關專業資格（如IIQE、CFP等）',
+            '每週與導師/前輩做一次檢討和學習',
+            '紀錄每次面談後的反思和改善點',
+            '關注保險業新聞和市場動態',
+            '向業績頂尖的同事虛心學習'
+        ],
+        tip: '給長遠發展的建議：把每一次客戶拒絕、每一次失敗的面談都當成學習機會。問自己：下次我能做什麼不同？持續迭代的人，一定會超越只靠天份的人。',
+        homework: [
+            '制定個人的「3個月學習計劃」',
+            '報名一個業界認可的進修課程',
+            '找一位你尊重的前輩，請他成為你的導師'
+        ]
+    },
+    {
+        day: 21, week: 3,
+        title: '21天總結：你已經準備好了！',
+        subtitle: '回顧成長，展望未來',
+        emoji: '🎓',
+        intro: '回顧成長，展望未來',
+        summary: [
+            '✅ 有清晰的銷售使命和動力',
+            '✅ 有一份持續更新的客戶名單',
+            '✅ 熟悉公司主力產品的核心賣點',
+            '✅ 能完整做需求分析和建議呈現',
+            '✅ 有應對常見拒絕的話術',
+            '✅ 已開始維護客戶關係並嘗試轉介紹',
+            '✅ 設定了活動量目標並開始追蹤',
+            '✅ 有個人學習和發展計劃'
+        ],
+        tip: '給你的最後一句話：保險銷售沒有捷徑，但有方向。21天只是起點，真正的成長在接下來的每一次拜訪、每一個電話、每一份用心準備的建議書裡。相信自己，持續行動，成功會來找你。加油！🎯',
+        homework: [
+            '完成21天畢業自我評核清單',
+            '寫一份「給未來自己的信」（3個月後讀）',
+            '與上司設定未來3個月的業績目標',
+            '慶祝自己完成了這21天！你值得🎉'
+        ]
+    }
+];
+
+// ============ GLOBAL STATE ============
+let currentDay = 1;
+let userName = '';
+let userTeam = '';
+
+// ============ LOGIN ============
+function handleLogin() {
+    const name = document.getElementById('loginName').value.trim();
+    const password = document.getElementById('loginPassword').value.trim();
+
+    if (!name) { alert('請輸入姓名！'); return; }
+    if (!password) { alert('請輸入密碼！'); return; }
+    if (password !== TRAINING_PASSWORD) { alert('密碼錯誤！請重新輸入或聯絡秘書'); return; }
+
+    userName = name;
+    userTeam = TEAM_NAME;
+    localStorage.setItem('vkam_userName', name);
+    localStorage.setItem('vkam_userTeam', TEAM_NAME);
+    
+    // 只在首次登入時創建進度
+    if (!localStorage.getItem('vkam_completed')) {
+        localStorage.setItem('vkam_completed', JSON.stringify(getEmptyProgress()));
+    }
+    if (!localStorage.getItem('vkam_homework')) {
+        localStorage.setItem('vkam_homework', JSON.stringify(getEmptyHomework()));
+    }
+
+    document.getElementById('loginPage').classList.add('hidden');
+    document.getElementById('mainPage').classList.remove('hidden');
+    document.getElementById('userNameDisplay').textContent = `| ${TEAM_NAME} - ${name}`;
+
+    loadProgress();
+    renderWeekOverview();
+}
+
+function getEmptyProgress() {
+    const arr = [];
+    for (let i = 1; i <= 21; i++) arr.push(false);
+    return arr;
+}
+
+function getEmptyHomework() {
+    const arr = [];
+    for (let i = 1; i <= 21; i++) arr.push(false);
+    return arr;
+}
+
+function loadProgress() {
+    const completed = JSON.parse(localStorage.getItem('vkam_completed') || '[]');
+    document.getElementById('progressFill').style.width = (completed.filter(Boolean).length / 21 * 100) + '%';
+    document.getElementById('progressText').textContent = `${completed.filter(Boolean).length} / 21 天`;
+}
+
+function isDayUnlocked(day) {
+    if (day === 1) return true;
+    
+    const completed = JSON.parse(localStorage.getItem('vkam_completed') || '[]');
+    const homeworkSubmitted = JSON.parse(localStorage.getItem('vkam_homework') || '[]');
+    
+    const prevDay = day - 1;
+    const isPrevCompleted = completed[prevDay - 1] || false;
+    const isPrevHomeworkSubmitted = homeworkSubmitted[prevDay - 1] || false;
+    
+    return isPrevCompleted && isPrevHomeworkSubmitted;
+}
+
+// ============ NAVIGATION ============
+function toggleMobileMenu() {
+    document.getElementById('mobileMenu').classList.toggle('hidden');
+}
+
+function showWeek(week) {
+    currentDay = week === 1 ? 1 : week === 2 ? 8 : 15;
+    document.getElementById('dayContent').classList.add('hidden');
+    document.getElementById('weekOverview').classList.remove('hidden');
+    document.getElementById('week1Content').classList.toggle('hidden', week !== 1);
+    document.getElementById('week2Content').classList.toggle('hidden', week !== 2);
+    document.getElementById('week3Content').classList.toggle('hidden', week !== 3);
+    document.getElementById('navButtons').classList.add('hidden');
+
+    document.querySelectorAll('[data-week]').forEach(btn => {
+        btn.classList.remove('bg-gradient-to-r', 'from-yellow-500', 'to-orange-500', 'text-black', 'font-bold');
+        if (parseInt(btn.dataset.week) === week) {
+            btn.classList.add('bg-gradient-to-r', 'from-yellow-500', 'to-orange-500', 'text-black', 'font-bold');
+        }
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function openDay(day, scrollToTop = true) {
+    if (!isDayUnlocked(day)) {
+        const completed = JSON.parse(localStorage.getItem('vkam_completed') || '[]');
+        const homeworkSubmitted = JSON.parse(localStorage.getItem('vkam_homework') || '[]');
+        const prevDay = day - 1;
+        const isPrevCompleted = completed[prevDay - 1] || false;
+        const isPrevHomeworkSubmitted = homeworkSubmitted[prevDay - 1] || false;
+        
+        let message = `Day ${day} 未解鎖！\n\n`;
+        if (!isPrevCompleted) {
+            message += `請先完成 Day ${prevDay} 的學習！`;
+        } else if (!isPrevHomeworkSubmitted) {
+            message += `請先提交 Day ${prevDay} 的作業！`;
+        }
+        
+        alert(message);
+        return;
+    }
+    
+    currentDay = day;
+    const item = curriculum[day - 1];
+    const completed = JSON.parse(localStorage.getItem('vkam_completed') || '[]');
+    const homeworkSubmitted = JSON.parse(localStorage.getItem('vkam_homework') || '[]');
+    const isCompleted = completed[day - 1];
+    const isHomeworkSubmitted = homeworkSubmitted[day - 1] || false;
+
+    document.getElementById('weekOverview').classList.add('hidden');
+    document.getElementById('navButtons').classList.remove('hidden');
+
+    let html = `
+    <div class="mb-6">
+        <div class="flex items-center gap-3 mb-2">
+            <span class="text-4xl">${item.emoji}</span>
+            <div>
+                <p class="text-yellow-400 text-sm font-bold tracking-widest">${userTeam} TEAM | Day ${day} / 21</p>
+                <h2 class="text-2xl md:text-3xl font-bold gradient-text">${item.title}</h2>
+                <p class="text-gray-400 text-sm">${item.subtitle}</p>
+            </div>
+        </div>
+    </div>`;
+
+    // ===== 今日學習目標 =====
+    html += `<div class="bg-gray-800/50 rounded-xl p-4 mb-6 border border-yellow-500/30">
+        <p class="text-yellow-400 font-bold mb-1">🎯 ${isCompleted ? '✅ 已完成' : '今日學習目標'}</p>
+        <p class="text-gray-300">${item.intro}</p>
+    </div>`;
+
+    // ===== 必懂術語 =====
+    if (item.mustKnow) {
+        html += `<div class="bg-blue-900/30 rounded-xl p-6 mb-6 border border-blue-500">
+            <h3 class="text-lg font-bold text-blue-400 mb-4">📚 必懂術語</h3>
+            <div class="space-y-3">`;
+        item.mustKnow.forEach(m => {
+            html += `<div class="concept-box rounded-lg p-3">
+                <span class="text-blue-700 font-bold">${m.term}</span>
+                <p class="text-sm mt-1">${m.meaning}</p>
+            </div>`;
+        });
+        html += `</div></div>`;
+    }
+
+    // ===== 核心概念 =====
+    if (item.concept) {
+        html += `<div class="bg-blue-900/30 rounded-xl p-6 mb-6 border border-blue-500">
+            <h3 class="text-lg font-bold text-blue-400 mb-3">💡 今日核心概念</h3>
+            <p class="text-gray-200">${item.concept}</p>
+        </div>`;
+    }
+
+    // ===== 話術範例 =====
+    if (item.script) {
+        html += `<div class="bg-gray-800/50 rounded-xl p-6 mb-6 border border-gray-600">
+            <h3 class="text-lg font-bold text-yellow-400 mb-4">💬 話術範例</h3>
+            <div class="script rounded-lg p-3 text-sm">${item.script}</div>
+        </div>`;
+    }
+
+    // ===== 學習步驟 =====
+    if (item.steps) {
+        html += `<div class="bg-green-900/30 rounded-xl p-6 mb-6 border border-green-500">
+            <h3 class="text-lg font-bold text-green-400 mb-4">📋 學習步驟</h3>
+            <ul class="text-gray-200 space-y-2 text-sm">`;
+        item.steps.forEach(step => {
+            html += `<li>• ${step}</li>`;
+        });
+        html += `</ul></div>`;
+    }
+
+    // ===== 清單 =====
+    if (item.checklist) {
+        html += `<div class="bg-yellow-900/30 rounded-xl p-6 mb-6 border border-yellow-500">
+            <h3 class="text-lg font-bold text-yellow-400 mb-4">✅ 清單</h3>
+            <ul class="text-gray-200 space-y-2 text-sm">`;
+        item.checklist.forEach(item => {
+            html += `<li>☐ ${item}</li>`;
+        });
+        html += `</ul></div>`;
+    }
+
+    // ===== 小提示 =====
+    if (item.tip) {
+        html += `<div class="tip-box rounded-xl p-4 mb-6 border border-yellow-500">
+            <p class="text-sm">${item.tip}</p>
+        </div>`;
+    }
+
+    // ===== 記憶技巧 =====
+    if (item.memory) {
+        html += `<div class="bg-blue-900/30 rounded-xl p-4 mb-6 border border-blue-500">
+            <p class="text-blue-300 text-sm">${item.memory}</p>
+        </div>`;
+    }
+
+    // ===== 作業提交 =====
+    html += `<div class="bg-orange-900/30 rounded-xl p-6 mb-6 border border-orange-500">
+        <h3 class="text-lg font-bold text-orange-400 mb-4">📝 每日作業</h3>
+        <div class="bg-gray-900/50 rounded-lg p-4 mb-4">
+            <p class="text-gray-300 mb-3">完成以下步驟：</p>
+            <ol class="text-gray-400 text-sm space-y-1 list-decimal list-inside">
+                <li>完成今日所有學習內容</li>
+                <li>準備好你的作業（可以是文字、圖片、影片）</li>
+                <li>點擊下方按鈕提交到 Google Form</li>
+            </ol>
+        </div>
+        
+        ${isHomeworkSubmitted ? 
+            `<div class="bg-green-900/50 rounded-lg p-4 text-center mb-4">
+                <p class="text-green-400 text-lg">✅ 作業已提交！</p>
+                <p class="text-gray-400 text-sm mt-1">你可以繼續下一天的學習</p>
+            </div>`
+            :
+            `<div class="space-y-4">
+                <div class="text-center">
+                    <a href="${GOOGLE_FORM_URL}" target="_blank" 
+                       class="inline-block px-8 py-3 rounded-xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 transition-all">
+                        📤 提交作業到 Google Form
+                    </a>
+                    <p class="text-gray-500 text-xs mt-2">新視窗開啟，提交後請返回此頁</p>
+                </div>
+                <div class="text-center">
+                    <button onclick="markHomeworkSubmitted(${day})" 
+                            class="px-6 py-2 rounded-lg font-bold bg-green-600 hover:bg-green-700 text-white transition-all">
+                        ✅ 我已提交作業
+                    </button>
+                    <p class="text-gray-500 text-xs mt-1">點此按鈕確認你已提交作業</p>
+                </div>
+            </div>`
+        }
+    </div>`;
+
+    // ===== 完成按鈕 =====
+    html += `<div class="text-center mt-8 mb-4">
+        <button onclick="markComplete(${day})" class="px-8 py-4 rounded-xl text-lg font-bold ${isCompleted ? 'bg-green-600 text-white' : 'login-btn'}">
+            ${isCompleted ? '✅ 已完成 -- 請按下一天' : '✅ 標記完成'}
+        </button>
+    </div>`;
+
+    // ===== 總結 =====
+    if (item.summary) {
+        html += `<div class="bg-gray-800/50 rounded-xl p-6 mb-6 border border-gray-600">
+            <h3 class="text-lg font-bold text-yellow-400 mb-4">📋 總結</h3>
+            <div class="space-y-2">`;
+        item.summary.forEach(s => {
+            html += `<p class="text-gray-300 text-sm">${s}</p>`;
+        });
+        html += `</div></div>`;
+    }
+
+    // ===== 下一步行動 =====
+    if (item.nextSteps) {
+        html += `<div class="bg-green-900/30 rounded-xl p-6 mb-6 border border-green-500">
+            <h3 class="text-lg font-bold text-green-400 mb-3">🚀 下一步行動</h3>
+            <div class="space-y-2">`;
+        item.nextSteps.forEach(s => {
+            html += `<p class="text-gray-300 text-sm">${s}</p>`;
+        });
+        html += `</div></div>`;
+    }
+
+    if (item.message) {
+        html += `<div class="bg-gradient-to-br from-yellow-900/30 to-orange-900/30 rounded-xl p-6 mb-6 border border-yellow-500 text-center">
+            <p class="text-yellow-300 text-lg">${item.message}</p>
+        </div>`;
+    }
+
+    document.getElementById('dayContent').innerHTML = html;
+    document.getElementById('dayContent').classList.remove('hidden');
+    if (scrollToTop) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+}
+
+function markComplete(day) {
+    const scrollY = window.scrollY;
+    
+    const completed = JSON.parse(localStorage.getItem('vkam_completed') || '[]');
+    completed[day - 1] = !completed[day - 1];
+    localStorage.setItem('vkam_completed', JSON.stringify(completed));
+    
+    loadProgress();
+    
+    const btn = document.querySelector(`button[onclick="markComplete(${day})"]`);
+    if (btn) {
+        if (completed[day - 1]) {
+            btn.className = 'px-8 py-4 rounded-xl text-lg font-bold bg-green-600 text-white';
+            btn.textContent = '✅ 已完成 -- 請按下一天';
+        } else {
+            btn.className = 'px-8 py-4 rounded-xl text-lg font-bold login-btn';
+            btn.textContent = '✅ 標記完成';
+        }
+    }
+    
+    setTimeout(() => {
+        window.scrollTo({ top: scrollY, behavior: 'instant' });
+    }, 0);
+}
+
+function markHomeworkSubmitted(day) {
+    const homework = JSON.parse(localStorage.getItem('vkam_homework') || '[]');
+    homework[day - 1] = true;
+    localStorage.setItem('vkam_homework', JSON.stringify(homework));
+    
+    const homeworkSection = document.querySelector('.bg-orange-900\\/30');
+    if (homeworkSection) {
+        const submitSection = homeworkSection.querySelector('.space-y-4');
+        if (submitSection) {
+            submitSection.innerHTML = `
+                <div class="bg-green-900/50 rounded-lg p-4 text-center mb-4">
+                    <p class="text-green-400 text-lg">✅ 作業已提交！</p>
+                    <p class="text-gray-400 text-sm mt-1">你可以繼續下一天的學習</p>
+                </div>
+            `;
+        }
+    }
+}
+
+function prevDay() {
+    if (currentDay > 1) openDay(currentDay - 1);
+}
+
+function nextDay() {
+    if (currentDay === 21) {
+        const completed = JSON.parse(localStorage.getItem('vkam_completed') || '[]');
+        const homeworkSubmitted = JSON.parse(localStorage.getItem('vkam_homework') || '[]');
+        const isCompleted = completed[20] || false;
+        const isHomeworkSubmitted = homeworkSubmitted[20] || false;
+        
+        if (!isCompleted || !isHomeworkSubmitted) {
+            alert('⚠️ 請先完成 Day 21 的所有步驟！\n\n你需要：\n1. 點擊「✅ 標記完成」\n2. 提交並確認作業');
+            return;
+        }
+        
+        showCelebration();
+        return;
+    }
+    
+    if (currentDay >= 21) return;
+    
+    const completed = JSON.parse(localStorage.getItem('vkam_completed') || '[]');
+    const homeworkSubmitted = JSON.parse(localStorage.getItem('vkam_homework') || '[]');
+    const isCompleted = completed[currentDay - 1] || false;
+    const isHomeworkSubmitted = homeworkSubmitted[currentDay - 1] || false;
+    
+    if (!isCompleted || !isHomeworkSubmitted) {
+        if (!isCompleted && !isHomeworkSubmitted) {
+            alert(`⚠️ 請先完成 Day ${currentDay} 的兩個步驟！\n\n你需要：\n1. 點擊「✅ 標記完成」\n2. 點擊「📤 提交作業到 Google Form」並提交\n3. 點擊「✅ 我已提交作業」確認`);
+        } else if (!isCompleted) {
+            alert(`⚠️ 請先完成 Day ${currentDay} 的學習！\n\n點擊「✅ 標記完成」`);
+        } else {
+            alert(`⚠️ 請先提交 Day ${currentDay} 的作業！\n\n你需要：\n1. 點擊「📤 提交作業到 Google Form」並提交\n2. 點擊「✅ 我已提交作業」確認`);
+        }
+        return;
+    }
+    
+    openDay(currentDay + 1);
+}
+
+function backToOverview() {
+    document.getElementById('dayContent').classList.add('hidden');
+    document.getElementById('navButtons').classList.add('hidden');
+    document.getElementById('weekOverview').classList.remove('hidden');
+    const week = currentDay <= 7 ? 1 : currentDay <= 14 ? 2 : 3;
+    document.getElementById('week1Content').classList.toggle('hidden', week !== 1);
+    document.getElementById('week2Content').classList.toggle('hidden', week !== 2);
+    document.getElementById('week3Content').classList.toggle('hidden', week !== 3);
+}
+
+function showCelebration() {
+    document.getElementById('celebrationOverlay').classList.remove('hidden');
+    document.getElementById('celebrationOverlay').classList.add('flex');
+    document.querySelector('nav').style.display = 'none';
+    document.getElementById('navButtons').style.display = 'none';
+}
+
+function closeCelebration() {
+    document.getElementById('celebrationOverlay').classList.add('hidden');
+    document.getElementById('celebrationOverlay').classList.remove('flex');
+    document.querySelector('nav').style.display = 'block';
+    document.getElementById('navButtons').style.display = 'flex';
+    backToOverview();
+}
+
+function logout() {
+    if (confirm('確定要登出嗎？登出後需要重新輸入姓名和密碼。')) {
+        // 清除本地存儲的用戶資料
+        localStorage.removeItem('vkam_userName');
+        localStorage.removeItem('vkam_userTeam');
+        
+        // 隱藏主頁面，顯示登入頁面
+        document.getElementById('mainPage').classList.add('hidden');
+        document.getElementById('loginPage').classList.remove('hidden');
+        
+        // 清空登入表單
+        document.getElementById('loginName').value = '';
+        document.getElementById('loginPassword').value = '';
+        
+        // 重置用戶名稱顯示
+        document.getElementById('userNameDisplay').textContent = '';
+    }
+}
+
+function renderWeekOverview() {
+    const completed = JSON.parse(localStorage.getItem('vkam_completed') || '[]');
+    const w1 = document.getElementById('week1Days');
+    const w2 = document.getElementById('week2Days');
+    const w3 = document.getElementById('week3Days');
+
+    w1.innerHTML = '';
+    w2.innerHTML = '';
+    w3.innerHTML = '';
+
+    curriculum.forEach(item => {
+        const isDone = completed[item.day - 1];
+        const el = document.createElement('div');
+        el.className = `day-card rounded-xl p-4 ${isDone ? 'completed' : ''} ${item.day === 1 ? 'today' : ''}`;
+        el.onclick = () => openDay(item.day);
+        el.innerHTML = `
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-2xl">${item.emoji}</span>
+                ${isDone ? '<span class="text-green-400 text-lg">✅</span>' : `<span class="text-gray-500 text-sm">Day ${item.day}</span>`}
+            </div>
+            <p class="font-bold text-sm">${item.title}</p>
+            <p class="text-gray-400 text-xs mt-1">${item.subtitle}</p>
+        `;
+        if (item.week === 1) w1.appendChild(el);
+        else if (item.week === 2) w2.appendChild(el);
+        else w3.appendChild(el);
+    });
+}
+
+// ============ INIT ============
+if (localStorage.getItem('vkam_userName')) {
+    userName = localStorage.getItem('vkam_userName');
+    userTeam = localStorage.getItem('vkam_userTeam') || TEAM_NAME;
+    document.getElementById('loginPage').classList.add('hidden');
+    document.getElementById('mainPage').classList.remove('hidden');
+    document.getElementById('userNameDisplay').textContent = `| ${userTeam} - ${userName}`;
+    loadProgress();
+    renderWeekOverview();
+}
+</script>
+
+</body>
+</html>
